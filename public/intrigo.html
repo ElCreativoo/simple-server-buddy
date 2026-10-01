@@ -48,24 +48,11 @@
       background: rgba(13,11,9,.78);
       border-bottom-color: rgba(255,255,255,.07);
     }
-    .nav-logo {
-      display:flex; align-items:center; gap:14px;
-      margin-left:12px;
-    }
     .nav-logo img {
       height: 16px; width: auto; display:block;
+      margin-left: 12px;
       filter: brightness(0) invert(1);
       opacity: 1; transition: opacity .4s;
-    }
-    .nav-logo .nav-tagline {
-      display:flex; align-items:center; gap:10px;
-      color:#fff; font-size:.72rem; font-weight:500;
-      letter-spacing:.32em; text-transform:uppercase;
-      white-space:nowrap;
-    }
-    .nav-logo .nav-tagline::before {
-      content:""; display:block; width:26px; height:1px;
-      background:rgba(255,255,255,.7);
     }
     nav.scrolled .nav-logo img { opacity: 1; }
     .nav-toggle { display:none; }
