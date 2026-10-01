@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inTrigo Gelateria Bern</title>
+  <meta name="description" content="inTrigo Gelateria Bern — Authentisches hausgemachtes Gelato seit 2019. Bümplizstrasse 116. Täglich 11–21 Uhr.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #b70071;
+      --pink-light: #e0407a;
+      --pink-glow: rgba(183,0,113,.45);
+      --bg: #faf8f4;
+      --dark: #0d0b09;
+      --text: #111;
+      --muted: #6a6a6a;
+      --line: #e6e1d8;
+      --gold: #c9a96e;
+      --cream: #f5ede0;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1180px, 92%); margin: auto; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top:0; left:0; width:100%; z-index:100;
+      transition: background .5s, border-color .5s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-inner {
+      display:flex; align-items:center; justify-content:space-between;
+      height:76px; padding:0 24px; max-width:1280px; margin:0 auto;
+      box-sizing:border-box;
+    }
+    nav.scrolled {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(13,11,9,.78);
+      border-bottom-color: rgba(255,255,255,.07);
+    }
+    .nav-logo img {
+      height: 36px; width: auto; display:block;
+      filter: brightness(0) invert(1);
+      opacity: 1; transition: opacity .4s;
+    }
+    nav.scrolled .nav-logo img { opacity: 1; }
+    .nav-toggle { display:none; }
+    .nav-links { position:fixed; top:0; left:50%; transform:translateX(-50%); height:76px; display:flex; gap:28px; align-items:center; justify-content:center; z-index:100; max-width:1280px; width:100%; padding:0 24px; box-sizing:border-box; }
+    .nav-links a { color:rgba(255,255,255,.65); font-size:.87rem; font-weight:500; letter-spacing:.03em; transition:color .2s; }
+    .nav-links a:hover { color:#fff; }
+    .nav-cta {
+      position:absolute; right:24px; padding:10px 22px; border-radius:999px;
+      background: linear-gradient(135deg, var(--pink-light), var(--pink));
+      color:#fff !important; font-size:.84rem; font-weight:600;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .nav-cta:hover { transform:translateY(-2px); box-shadow:0 8px 28px var(--pink-glow); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; height: 100dvh; min-height: 640px;
+      overflow: hidden; display: flex; align-items: flex-end;
+    }
+    .hero-bg { position:absolute; inset:0; z-index:0; }
+    .hero-bg img {
+      height:100%; object-fit:cover; object-position: center 55%;
+      transform-origin: center 55%;
+      animation: kenburns 24s ease-in-out infinite alternate;
+    }
+    @keyframes kenburns {
+      from { transform: scale(1.0); }
+      to   { transform: scale(1.07) translate(-1.5%, 1%); }
+    }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background:
+        linear-gradient(to top, rgba(13,11,9,.92) 0%, rgba(13,11,9,.5) 38%, rgba(13,11,9,.18) 100%),
+        linear-gradient(to right, rgba(13,11,9,.6) 0%, transparent 60%);
+    }
+    .hero-wash {
+      position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:
+        radial-gradient(ellipse 70% 60% at 0% 100%, rgba(183,0,113,.38) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 35% at 95% 5%, rgba(183,0,113,.15) 0%, transparent 50%);
+    }
+    .hero-content {
+      position:relative; z-index:10; width:100%;
+      padding: 0 0 80px;
+    }
+    /* Eyebrow */
+    .hero-eye {
+      display:inline-flex; align-items:center; gap:10px;
+      color:rgba(255,255,255,.48); font-size:.7rem; font-weight:500;
+      letter-spacing:.26em; text-transform:uppercase;
+      margin-bottom:22px;
+      opacity:0; animation: fadeUp .8s .22s forwards;
+    }
+    .hero-eye::before { content:''; width:28px; height:1px; background:rgba(255,255,255,.3); flex-shrink:0; }
+    /* Headline */
+    .hero-h1 {
+      font-family:'Cormorant Garamond',serif;
+      font-size: clamp(3.6rem, 7vw, 8.2rem);
+      line-height:.9; font-weight:600; letter-spacing:-.03em;
+      color:#fff; margin-bottom:0;
+    }
+    .hero-h1 .ln { display:block; overflow:hidden; }
+    .hero-h1 .ln span { display:block; transform:translateY(110%); animation: lineUp 1s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-h1 .ln:nth-child(1) span { animation-delay:.28s; }
+    .hero-h1 .ln:nth-child(2) span { animation-delay:.44s; }
+    .hero-h1 .ln:nth-child(3) span { animation-delay:.58s; }
+
+    /* colour treatments per line */
+    .hero-h1 .ln:nth-child(1) span {
+      background: linear-gradient(105deg,#fff 40%,#f0d0b0 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-h1 em {
+      font-style:italic;
+      -webkit-text-fill-color:transparent;
+      -webkit-text-stroke:2px var(--pink);
+      filter: drop-shadow(0 0 22px var(--pink-glow));
+    }
+    .hero-h1 .ln:nth-child(3) span {
+      background: linear-gradient(105deg, var(--pink) 0%, var(--pink-light) 60%, #f5a060 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    @keyframes lineUp { to { transform:translateY(0); } }
+    /* Divider */
+    .hero-bar {
+      width:52px; height:2px; border-radius:2px;
+      background: linear-gradient(90deg, var(--pink), var(--pink-light));
+      margin: 30px 0;
+      opacity:0; animation: fadeUp .7s .7s forwards;
+    }
+    /* Bottom */
+    .hero-bottom { display:flex; align-items:center; gap:28px; flex-wrap:wrap; opacity:0; animation: fadeUp .8s .86s forwards; }
+    .hero-desc { max-width:360px; color:rgba(255,255,255,.92); line-height:1.85; font-size:.94rem; flex:1 1 260px; text-shadow: 0 1px 6px rgba(0,0,0,.55); }
+    .hero-btns { display:flex; gap:12px; flex-wrap:wrap; flex-shrink:0; }
+    .btn-main {
+      padding:15px 32px; border-radius:999px;
+      background: linear-gradient(130deg, var(--pink-light), var(--pink));
+      color:#fff; font-size:.88rem; font-weight:600;
+      transition:transform .3s,box-shadow .3s; position:relative; overflow:hidden;
+    }
+    .btn-main::after { content:''; position:absolute; inset:0; border-radius:999px; background:radial-gradient(circle at 50% -20%,rgba(255,255,255,.25) 0%,transparent 65%); }
+    .btn-main:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 14px 40px var(--pink-glow); }
+    .btn-ghost {
+      padding:15px 32px; border-radius:999px;
+      border:1.5px solid rgba(255,255,255,.25); color:#fff;
+      font-size:.88rem; font-weight:500; backdrop-filter:blur(8px);
+      background:rgba(255,255,255,.06);
+      transition:transform .3s,border-color .3s,background .3s;
+    }
+    .btn-ghost:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.1); }
+    /* Floating pills */
+    .hero-pills {
+      position:absolute; top:96px; right:36px; z-index:10;
+      display:flex; flex-direction:column; gap:10px;
+      opacity:0; animation: fadeLeft 1s .95s forwards;
+    }
+    .pill {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 18px 10px 12px; border-radius:999px;
+      background:rgba(0,0,0,.42); border:1px solid rgba(255,255,255,.11);
+      backdrop-filter:blur(14px); white-space:nowrap;
+    }
+    .pill-icon { font-size:1rem; }
+    .pill strong { display:block; color:#fff; font-size:.81rem; font-weight:600; }
+    .pill span  { color:rgba(255,255,255,.42); font-size:.7rem; }
+    /* Scroll cue */
+    .scroll-cue {
+      position:absolute; bottom:30px; right:38px; z-index:10;
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      opacity:0; animation: fadeUp .7s 1.5s forwards;
+    }
+    .scroll-cue span { font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.35); writing-mode:vertical-rl; transform:rotate(180deg); }
+    .scroll-line { width:1px; height:50px; background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent); animation:scrollPulse 2.2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:.5} 50%{transform:scaleY(.45);opacity:.18} }
+    @keyframes fadeUp  { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+    @keyframes fadeLeft{ from{opacity:0;transform:translateX(22px)} to{opacity:1;transform:none} }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap { overflow:hidden; background:var(--dark); padding:15px 0; white-space:nowrap; }
+    .marquee-track { display:inline-block; animation: marquee 26s linear infinite; }
+    .marquee-track span { color:rgba(255,255,255,.45); font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; font-weight:500; margin:0 22px; }
+    .marquee-track .dot { color:var(--pink); }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ─── PHOTO STRIP ─── */
+    .strip {
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:3px;
+    }
+    .strip-img { overflow:hidden; height:320px; }
+    .strip-img img { width:100%; height:100%; object-fit:cover; transition:transform 6s ease; }
+    .strip-img:hover img { transform:scale(1.06); }
+
+    /* ─── SECTION BASE ─── */
+    section { padding:120px 0; }
+    .label {
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--pink); font-size:.7rem; font-weight:600;
+      letter-spacing:.2em; text-transform:uppercase; margin-bottom:18px;
+    }
+    .label::before { content:''; width:22px; height:1px; background:var(--pink); }
+    h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.6rem,5.5vw,5rem);
+      line-height:.94; letter-spacing:-.03em; font-weight:600;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:88px; align-items:center; }
+    .about-imgs { position:relative; }
+    .about-main { border-radius:28px; overflow:hidden; height:560px; }
+    .about-main img { height:100%; }
+    .about-float {
+      position:absolute; bottom:-40px; right:-28px;
+      width:50%; height:270px; border-radius:22px; overflow:hidden;
+      border:6px solid var(--bg); box-shadow:0 20px 60px rgba(0,0,0,.14);
+    }
+    .about-float img { height:100%; }
+        .about-text h2 { margin-bottom:28px; }
+    .about-text p { color:var(--muted); line-height:1.95; margin-bottom:18px; font-size:.98rem; max-width:520px; }
+    .stats { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:44px; }
+    .stat { border-top:1px solid var(--line); padding-top:16px; }
+    .stat h3 { font-family:'Cormorant Garamond',serif; font-size:2.3rem; font-weight:600; letter-spacing:-.02em; margin-bottom:4px; }
+    .stat span { color:var(--muted); font-size:.82rem; }
+    
+    /* ─── FLAVORS ─── */
+    .flavors-sec { background:#fff; }
+    .flavors-head { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end; margin-bottom:60px; }
+    .flavors-head p { color:var(--muted); line-height:1.85; }
+    .flavor-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .flavor-card {
+      border-radius:28px; overflow:hidden; position:relative;
+      height:340px; cursor:pointer;
+      transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+    }
+    .flavor-card:hover { transform:translateY(-8px) scale(1.01); box-shadow:0 28px 60px rgba(0,0,0,.18); }
+    .flavor-card img { height:100%; object-position:center center; transition:transform 6s ease; }
+    .flavor-card:hover img { transform:scale(1.07); }
+    .flavor-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.1) 55%, transparent 100%);
+    }
+    .flavor-info { position:absolute; bottom:0; left:0; right:0; padding:24px 26px; }
+    .flavor-info h3 { font-family:'Cormorant Garamond',serif; font-size:1.9rem; color:#fff; font-weight:600; margin-bottom:6px; }
+    .flavor-info p { color:rgba(255,255,255,.62); font-size:.84rem; line-height:1.7; }
+    .flavor-tag {
+      position:absolute; top:18px; right:18px;
+      background:var(--pink); color:#fff;
+      font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+      padding:6px 13px; border-radius:999px;
+    }
+
+    /* ─── GELATI MENU CARD ─── */
+    .gelati-menu-card {
+      display:flex; align-items:stretch; gap:40px;
+      background:var(--bg); border-radius:28px; overflow:hidden;
+      margin-top:60px; margin-bottom:60px; min-height:400px; box-shadow:0 4px 24px rgba(0,0,0,.06);
+    }
+    .gelati-menu-card img { width:38%; height:100%; object-fit:cover; display:block; }
+    .gelati-menu-card-text { padding:40px 40px 40px 0; flex:1; display:flex; flex-direction:column; justify-content:center; }
+    .gelati-menu-card-text h3 { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:600; margin-bottom:10px; }
+    .gelati-menu-card-text p { color:var(--muted); line-height:1.85; font-size:.96rem; }
+    .gelati-menu-card-text .prices { display:flex; gap:24px; margin-top:20px; flex-wrap:wrap; }
+    .gelati-menu-card-text .prices span { background:var(--line); padding:8px 16px; border-radius:40px; font-size:.85rem; font-weight:500; }
+
+    /* ─── FULL-WIDTH PHOTO FEATURE ─── */
+    .feature-band {
+      position:relative; height:600px; overflow:hidden;
+      display:flex; align-items:center;
+    }
+    .feature-band img { position:absolute; inset:0; height:100%; transition:transform 14s ease; }
+    .feature-band:hover img { transform:scale(1.04); }
+    .feature-band::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to right, rgba(13,11,9,.92) 0%, rgba(13,11,9,.72) 50%, rgba(13,11,9,.3) 75%, transparent 100%);
+    }
+    .feature-copy {
+      position:relative; z-index:2;
+      max-width: 580px; padding: 0 0 0 min(10%, 120px);
+    }
+    .feature-copy .label { color:var(--gold); }
+    .feature-copy .label::before { background:var(--gold); }
+    .feature-copy h2 { color:#fff; margin-bottom:24px; }
+    .feature-copy p { color:rgba(255,255,255,.6); line-height:1.9; margin-bottom:36px; font-size:.97rem; }
+
+    /* ─── REVIEWS ─── */
+    .reviews-head { display:grid; grid-template-columns:1fr auto; align-items:end; margin-bottom:52px; gap:32px; }
+    .rating-chip {
+      display:flex; align-items:center; gap:9px;
+      padding:11px 20px; border-radius:999px; border:1.5px solid var(--line);
+      white-space:nowrap;
+    }
+    .stars { color:#f0a500; letter-spacing:.05em; }
+    .rating-chip strong { font-size:.93rem; }
+    .rating-chip span { color:var(--muted); font-size:.83rem; }
+    .reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .review-card {
+      padding:30px 26px; border-radius:24px; background:#fff;
+      border:1.5px solid var(--line); transition:transform .3s,box-shadow .3s;
+    }
+    .review-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,.06); }
+    .review-stars { color:#f0a500; font-size:.88rem; margin-bottom:14px; }
+    .review-card p { color:#1a1a1a; line-height:1.85; margin-bottom:18px; font-size:.93rem; }
+    .reviewer strong { font-size:.86rem; font-weight:600; }
+    .reviewer span { color:var(--muted); font-size:.78rem; display:block; }
+
+    /* ─── VISIT ─── */
+    .visit-sec { background:var(--dark); color:#fff; }
+    .visit-sec .label { color:var(--gold); }
+    .visit-sec .label::before { background:var(--gold); }
+    .visit-sec h2 { color:#fff; margin-bottom:60px; }
+    .info-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+    .info-card {
+      padding:34px 30px; border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+      transition:border-color .3s,background .3s;
+    }
+    .info-card:hover { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.03); }
+    .info-card-icon { font-size:1.5rem; margin-bottom:16px; display:block; }
+    .info-card h4 { color:rgba(255,255,255,.45); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; font-weight:500; margin-bottom:12px; }
+    .info-card p, .info-card a { font-size:1.02rem; line-height:1.85; color:#fff; }
+    .info-card .hours-list { line-height:2; }
+    .info-card a.link { display:inline-block; margin-top:10px; color:var(--gold); font-weight:500; font-size:.9rem; transition:opacity .25s; }
+    .info-card a.link:hover { opacity:.7; }
+    .map-wrap { margin-top:50px; border-radius:24px; overflow:hidden; height:300px; border:1px solid rgba(255,255,255,.06); }
+    .map-wrap iframe { width:100%; height:100%; border:0; display:block; filter:grayscale(1) invert(1); opacity:.8; }
+
+    /* ─── FOOTER ─── */
+    footer { background:var(--dark); border-top:1px solid rgba(255,255,255,.06); padding:32px 0 56px; }
+    .footer-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .footer-logo img { height:34px; width:auto; filter:brightness(0) invert(1); opacity:.75; }
+    .footer-copy { color:rgba(255,255,255,.3); font-size:.83rem; }
+
+    /* ─── SCROLL FADE ─── */
+    [data-fade] { opacity:0; transform:translateY(26px); transition:opacity .9s ease,transform .9s ease; }
+    [data-fade].in { opacity:1; transform:none; }
+    [data-fade="1"]{ transition-delay:.1s; } [data-fade="2"]{ transition-delay:.22s; }
+    [data-fade="3"]{ transition-delay:.34s; } [data-fade="4"]{ transition-delay:.46s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1060px){
+      .about-grid { grid-template-columns:1fr; gap:50px; }
+      .about-imgs { order:-1; }
+      .about-main { height:420px; }
+      .about-float { right:0; bottom:-28px; }
+      .flavors-head { grid-template-columns:1fr; gap:14px; }
+      .reviews-head { grid-template-columns:1fr; }
+      .feature-copy { max-width:480px; }
+    }
+
+    @media(max-width:820px){
+      section { padding:72px 0; }
+
+      /* Hero */
+      .hero { justify-content: center; }
+      .hero-content { padding: 0 0 52px; }
+      .hero-eye { margin-bottom: 12px; font-size:.65rem; }
+      .hero-bar { margin: 18px 0; }
+      .hero-bottom { flex-direction:column; align-items:flex-start; gap:16px; }
+      .hero-btns { width:100%; }
+      .btn-main, .btn-ghost { flex:1; text-align:center; padding:14px 20px; }
+      .hero-pills { display:none; }
+      .scroll-cue { display:none; }
+
+      /* Strip — responsive grid on mobile */
+      .strip { display:grid; grid-template-columns:1fr 1fr; height:auto; gap:2px; }
+      .strip-img { height:200px; }
+
+      /* About */
+      .about-imgs { display:none; }
+
+      /* Flavors */
+      .flavor-grid { grid-template-columns:1fr 1fr; gap:12px; }
+      .flavor-card { height:280px; }
+      .flavor-grid .flavor-card:last-child { grid-column:1/-1; height:220px; }
+
+      /* Feature band */
+      .feature-band { height:auto; padding:72px 0; }
+      .feature-band img { opacity:.25; }
+      .feature-copy { max-width:100%; padding:0; }
+
+      /* Reviews */
+      .reviews-grid { grid-template-columns:1fr; }
+      .info-grid { grid-template-columns:1fr 1fr; }
+      /* Gelati menu card mobile */
+      .gelati-menu-card { flex-direction:column; text-align:center; min-height:auto; }
+      .gelati-menu-card img { width:100%; height:auto; max-height:300px; }
+      .gelati-menu-card-text { padding:0 28px 28px; }
+      .gelati-menu-card-text .prices { justify-content:center; }
+    }
+    @media(max-width:580px){
+      .info-grid { grid-template-columns:1fr; }
+    }
+
+    @media(max-width:480px){
+      .nav-toggle { display:flex; flex-direction:column; gap:6px; background:none; border:none; cursor:pointer; padding:6px; position:fixed; top:22px; right:24px; z-index:300; }
+      .nav-toggle span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:transform .3s, opacity .3s; }
+      nav.nav-open ~ .nav-toggle span:nth-child(1) { transform:translateY(8px) rotate(45deg); }
+      nav.nav-open ~ .nav-toggle span:nth-child(2) { opacity:0; }
+      nav.nav-open ~ .nav-toggle span:nth-child(3) { transform:translateY(-8px) rotate(-45deg); }
+      body:has(nav.nav-open) { overflow:hidden; }
+      .nav-links { position:fixed; top:0; left:0; right:0; bottom:0; height:100dvh; z-index:200; background:rgba(13,11,9,.97); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:24px; padding:80px 0; overflow-y:auto; opacity:0; pointer-events:none; transition:opacity .3s ease; transform:none; }
+      nav.nav-open ~ .nav-links { opacity:1; pointer-events:auto; }
+      nav.nav-open { background:rgba(13,11,9,.78); }
+      .nav-links a { font-size:1.4rem; color:rgba(255,255,255,.85); font-weight:500; letter-spacing:.04em; }
+      .nav-links a:hover { color:#fff; }
+      .nav-links .nav-cta { position:static; background:var(--pink); color:#fff; padding:10px 28px; border-radius:999px; font-size:.95rem; display:inline-block; }
+
+      /* Hero */
+      .hero { justify-content: center; }
+      .hero-content { padding: 0 0 40px; }
+      .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+      .hero-eye { display:none; }
+      .hero-bar { margin: 14px 0; }
+      .hero-desc { font-size:.86rem; }
+      .btn-main, .btn-ghost { padding:13px 16px; font-size:.85rem; }
+
+      /* Strip already hidden above — now visible via 820px rule */
+
+      /* About */
+      .about-imgs { display:none; }
+      .strip-img { height:160px; }
+
+      /* Flavors — 1 col */
+      .flavor-grid { grid-template-columns:1fr; gap:12px; }
+      .flavor-card { height:220px; }
+      .flavor-grid .flavor-card:last-child { grid-column:auto; height:220px; }
+
+      .footer-inner { flex-direction:column; align-items:flex-start; gap:14px; }
+      .gelati-menu-card { flex-direction:column; text-align:center; min-height:auto; padding:20px; }
+      .gelati-menu-card img { width:100%; height:auto; max-height:240px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="inTrigo">
+      <img src="logo.svg" alt="inTrigo Gelateria">
+    </a>
+  </div>
+</nav>
+<button class="nav-toggle" aria-label="Menü">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+  <a href="#about">Über uns</a>
+  <a href="#flavors">Gelato</a>
+  <a href="#reviews">Bewertungen</a>
+  <a href="#visit">Besuch</a>
+  <a href="https://wa.me/41765148557" target="_blank" rel="noopener" class="nav-cta">WhatsApp</a>
+</div>
+
+<main>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="shop5.jpg" alt="Intrigo Gelateria Vitrine">
+    </div>
+    <div class="hero-wash"></div>
+
+    <!-- Pills -->
+    <div class="hero-pills">
+      <div class="pill">
+        <span class="pill-icon">🕐</span>
+        <div><strong>Heute geöffnet</strong><span>11:00 – 21:00 Uhr</span></div>
+      </div>
+      <div class="pill">
+        <span class="pill-icon">📍</span>
+        <div><strong>Bümplizstrasse 116</strong><span>3018 Bern</span></div>
+      </div>
+      <div class="pill">
+        <span class="pill-icon">🍦</span>
+        <div><strong>Vielfältige Gelato-Auswahl</strong><span>Täglich frisch hergestellt</span></div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <!-- Content -->
+    <div class="hero-content">
+      <div class="container">
+
+        
+        <div class="hero-eye">Artigianale &nbsp;·&nbsp; Bern</div>
+
+        <h1 class="hero-h1">
+          <span class="ln"><span>Echtes</span></span>
+          <span class="ln"><span><em>Italiens</em></span></span>
+          <span class="ln"><span>Gelato.</span></span>
+        </h1>
+
+        <div class="hero-bar"></div>
+
+        <div class="hero-bottom">
+          <p class="hero-desc">
+            Artigianale Gelateria Intrigo — aus 100&nbsp;% garantierten Rohstoffen,
+            täglich frisch. Ein Stück Italien in Bern.
+          </p>
+          <div class="hero-btns">
+            <a href="#flavors" class="btn-main">Gelato-Auswahl</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Pistacchio</span><span class="dot">✦</span>
+      <span>Amarena</span><span class="dot">✦</span>
+      <span>Stracciatella</span><span class="dot">✦</span>
+      <span>Cioccolato</span><span class="dot">✦</span>
+      <span>Mandarine</span><span class="dot">✦</span>
+      <span>Fior di Latte</span><span class="dot">✦</span>
+      <span>Caramello</span><span class="dot">✦</span>
+      <span>Limone Sorbet</span><span class="dot">✦</span>
+      <span>Pistacchio</span><span class="dot">✦</span>
+      <span>Amarena</span><span class="dot">✦</span>
+      <span>Stracciatella</span><span class="dot">✦</span>
+      <span>Cioccolato</span><span class="dot">✦</span>
+      <span>Mandarine</span><span class="dot">✦</span>
+      <span>Fior di Latte</span><span class="dot">✦</span>
+      <span>Caramello</span><span class="dot">✦</span>
+      <span>Limone Sorbet</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══ PHOTO STRIP ═══ -->
+  <div class="strip">
+    <div class="strip-img">
+      <img src="shop2.jpg" alt="Intrigo Aussenansicht Artigianale">
+    </div>
+    <div class="strip-img">
+      <img src="shop9.jpg" alt="Intrigo Gelati Preise">
+    </div>
+    <div class="strip-img">
+      <img src="shop6.jpg" alt="Intrigo La Dolce Vita">
+    </div>
+    <div class="strip-img">
+      <img src="shop11.jpg" alt="Intrigo Gelato Genuss">
+    </div>
+    <div class="strip-img">
+      <img src="shop3.jpg" alt="Intrigo Innenraum">
+    </div>
+    <div class="strip-img">
+      <img src="shop1.jpg" alt="Intrigo Kinderzimmer Deko">
+    </div>
+    <div class="strip-img">
+      <img src="shop8.jpg" alt="Intrigo Caffè Menu">
+    </div>
+    <div class="strip-img">
+      <img src="shop7.jpg" alt="Intrigo Latte Art">
+    </div>
+    <div class="strip-img">
+      <img src="shop4.jpg" alt="Intrigo Gelato Vitrine bunt">
+    </div>
+    <div class="strip-img">
+      <img src="shop10.jpg" alt="Intrigo Kinderbereich Deko">
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about">
+    <div class="container about-grid">
+
+      <div class="about-imgs" data-fade>
+        <div class="about-main">
+          <img src="shop4.jpg" alt="Intrigo Gelato Vitrine alle Sorten">
+        </div>
+        <div class="about-float">
+          <img src="shop6.jpg" alt="Intrigo La Dolce Vita">
+        </div>
+        </div>
+
+      <div class="about-text">
+        <div class="label" data-fade>Über uns</div>
+        <h2 data-fade="1">Die Geschichte einer Eiscreme aus Güte.</h2>
+        <div data-fade="2">
+          <p>Wir sind ein ruhiger Familienbetrieb, geführt von Julian und Loredana. Wir erfreuen unsere Kunden mit hausgemachtem Eis, für das wir ausgezeichnete, zu 100&nbsp;% garantierte Rohstoffe verwenden.</p>
+          <p>Viele gute Geschmacksrichtungen, phantasievolle Variationen, Sorbets für den Gaumen von Veganern und Laktoseintoleranten — für jeden ist etwas dabei.</p>
+          <p>Unser Engagement und unsere Leidenschaft werden von unseren Kunden mit Vertrauen und Loyalität belohnt.</p>
+          <p>Familien sind bei uns besonders willkommen: Ein <strong>eigener Spielbereich für Kinder</strong> sorgt dafür, dass die Kleinen sich wohlfühlen — während die Grossen ihr Gelato in Ruhe geniessen.</p>
+        </div>
+        <div class="stats" data-fade="3">
+          <div class="stat"><h3>Seit 2019</h3><span>In Bümpliz verwurzelt</span></div>
+          <div class="stat"><h3>100%</h3><span>Garantierte Rohstoffe</span></div>
+          <div class="stat"><h3>🧸 Spielbereich</h3><span>Für Familien &amp; Kinder</span></div>
+          <div class="stat"><h3>Vegan &amp; laktosefrei</h3><span>Sorbets für jeden Gaumen</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <!-- ═══ FLAVORS ═══ -->
+  <section class="flavors-sec" id="flavors">
+    <div class="container">
+      <div class="flavors-head">
+        <div>
+          <div class="label" data-fade>Signature Sorten</div>
+          <h2 data-fade="1">Reich. Cremig.<br>Unvergesslich.</h2>
+        </div>
+        <p data-fade="2">Täglich frisch hergestellt — aus hochwertigen Zutaten nach klassischen italienischen Rezepturen.</p>
+      </div>
+
+      <div class="flavor-grid">
+        <div class="flavor-card" data-fade>
+          <img src="https://images.pexels.com/photos/8713080/pexels-photo-8713080.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Pistacchio">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Pistacchio</h3><p>Tiefes Röst-Pistazien-Aroma, samtig-cremig.</p></div>
+          <span class="flavor-tag">Beliebt</span>
+        </div>
+        <div class="flavor-card" data-fade="1">
+          <img src="https://images.pexels.com/photos/5061210/pexels-photo-5061210.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Cioccolato">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Cioccolato</h3><p>Intensives Kakao-Gelato mit sattem Schmelz.</p></div>
+        </div>
+        <div class="flavor-card" data-fade="2">
+          <img src="https://images.pexels.com/photos/9227965/pexels-photo-9227965.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Fior di Latte">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Fior di Latte</h3><p>Reinste Frischmilch, zart und zeitlos.</p></div>
+          <span class="flavor-tag">Klassisch</span>
+        </div>
+        <div class="flavor-card" data-fade="3">
+          <img src="https://images.pexels.com/photos/12861927/pexels-photo-12861927.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Amarena">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Amarena</h3><p>Dunkle Sauerkirschen in cremigem Fior di Latte.</p></div>
+        </div>
+        <div class="flavor-card" data-fade="4">
+          <img src="https://images.pexels.com/photos/1591242/pexels-photo-1591242.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Stracciatella">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Stracciatella</h3><p>Knusprige Schokoladensplitter in Fior di Latte.</p></div>
+        </div>
+        <div class="flavor-card" data-fade>
+          <img src="https://images.pexels.com/photos/9227970/pexels-photo-9227970.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Sorbets">
+          <div class="flavor-overlay"></div>
+          <div class="flavor-info"><h3>Sorbets</h3><p>Vegan &amp; laktosefrei — Mandarine, Limone &amp; mehr.</p></div>
+          <span class="flavor-tag">Vegan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GELATI MENU ═══ -->
+  <div class="container">
+    <div class="gelati-menu-card">
+      <img src="shop9.jpg" alt="Intrigo Gelati Preise Menu">
+      <div class="gelati-menu-card-text">
+        <h3>Unsere Gelati-Preise</h3>
+        <p>Vom kleinen Glück bis zur Familienportion — bei uns findet jede Portion ihren Preis.</p>
+        <div class="prices">
+          <span>Piccolo 4.–</span>
+          <span>Medio 5.–</span>
+          <span>Grande 6.–</span>
+          <span>500ml 13.–</span>
+          <span>1000ml 24.–</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FEATURE BAND ═══ -->
+  <div class="feature-band">
+    <img src="shop7.jpg" alt="Intrigo Latte Art">
+    <div class="feature-copy container">
+      <div class="label">Leidenschaft &amp; Handwerk</div>
+      <h2>Jede Kugel erzählt eine Geschichte.</h2>
+      <p>Wir wählen unsere Rohstoffe mit grösster Sorgfalt aus und verarbeiten sie täglich frisch. Keine Kompromisse — nur echtes, authentisches Handwerksgelato.</p>
+      <a href="#visit" class="btn-main" style="display:inline-block">Gelateria besuchen</a>
+    </div>
+  </div>
+
+  <!-- ═══ REVIEWS ═══ -->
+  <section id="reviews">
+    <div class="container">
+      <div class="reviews-head">
+        <div>
+          <div class="label" data-fade>Was Gäste sagen</div>
+          <h2 data-fade="1">Vertrauen &amp; Loyalität<br>unserer Kunden.</h2>
+        </div>
+        <div class="rating-chip" data-fade="2">
+          <span class="stars">★★★★☆</span>
+          <strong>4.1</strong>
+          <span>· 63 Bewertungen</span>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card" data-fade>
+          <div class="review-stars">★★★★★</div>
+          <p>„Grossartiges Gelato. Pistazie und Amarena waren extrem aromatisch und perfekt cremig. Empfehle es wärmstens!"</p>
+          <div class="reviewer"><strong>Lokaler Gast</strong><span>via Google</span></div>
+        </div>
+        <div class="review-card" data-fade="1">
+          <div class="review-stars">★★★★★</div>
+          <p>„Cremig, süss, wie in Italien. Freundliche Bedienung — genau das, was ich mir erhofft hatte."</p>
+          <div class="reviewer"><strong>Stammkunde</strong><span>via Google</span></div>
+        </div>
+        <div class="review-card" data-fade="2">
+          <div class="review-stars">★★★★★</div>
+          <p>„Sehr gemütlich, freundliches Personal und extrem feine italienische Leckereien. Komme immer wieder gerne."</p>
+          <div class="reviewer"><strong>Bern Local Guide</strong><span>via Google</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VISIT ═══ -->
+  <section class="visit-sec" id="visit">
+    <div class="container">
+      <div class="label" data-fade>Besuchen Sie uns</div>
+      <h2 data-fade="1">Ihr Gelato-Lieblings&shy;ort<br>in Bern.</h2>
+      <div class="info-grid">
+        <div class="info-card" data-fade="2">
+          <span class="info-card-icon">📍</span>
+          <h4>Adresse</h4>
+          <p>Bümplizstrasse 116<br>3018 Bern, Schweiz</p>
+          <a href="https://maps.google.com/?q=Bümplizstrasse+116,+3018+Bern" target="_blank" rel="noopener" class="link">Google Maps →</a>
+        </div>
+        <div class="info-card" data-fade="3">
+          <span class="info-card-icon">🕐</span>
+          <h4>Öffnungszeiten</h4>
+          <p class="hours-list">
+            Täglich geöffnet<br>
+            <strong>11:00–21:00</strong><br>
+            <span style="opacity:.7">Sonntag ab 10:00</span>
+          </p>
+        </div>
+        <div class="info-card" data-fade="3">
+          <span class="info-card-icon">🧸</span>
+          <h4>Für Familien</h4>
+          <p>Spielbereich für Kinder vorhanden — kommt zusammen und geniesst.</p>
+        </div>
+        <div class="info-card" data-fade="4">
+          <span class="info-card-icon">📞</span>
+          <h4>Kontakt</h4>
+          <p><a href="tel:+41765148557">076 514 85 57</a></p>
+          <a href="https://wa.me/41765148557" target="_blank" rel="noopener" class="link">WhatsApp schreiben →</a>
+        </div>
+      </div>
+      <div class="map-wrap" data-fade>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2725.4!2d7.3900!3d46.9480!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e39d5a9c7d1e3%3A0xb1f5ec1b42b2a2a7!2sB%C3%BCmplizstrasse%20116%2C%203018%20Bern!5e0!3m2!1sde!2sch!4v1700000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Karte inTrigo Bern"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo"><img src="logo.svg" alt="inTrigo Gelateria"></div>
+    <p class="footer-copy">inTrigo Gelateria Bern &nbsp;·&nbsp; Bümplizstrasse 116, 3018 Bern &nbsp;·&nbsp; Täglich 11–21 Uhr</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+  nav.classList.toggle('scrolled', scrollY > 40);
+
+  // Mobile nav toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('nav-open');
+    });
+    // Close menu on link click with smooth scroll
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        nav.classList.remove('nav-open');
+        const id = a.getAttribute('href');
+        if (id && id !== '#') {
+          setTimeout(() => document.querySelector(id)?.scrollIntoView({ behavior:'smooth' }), 200);
+        }
+      });
+    });
+  }
+
+  // Fade in on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.1});
+  document.querySelectorAll('[data-fade]').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
