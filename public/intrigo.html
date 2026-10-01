@@ -72,7 +72,7 @@
     /* ─── HERO ─── */
     .hero {
       position: relative; height: 100dvh; min-height: 640px;
-      overflow: hidden; display: flex; align-items: flex-end;
+      overflow: hidden; display: flex; align-items: flex-start;
     }
     .hero-bg { position:absolute; inset:0; z-index:0; }
     .hero-bg img {
@@ -98,7 +98,7 @@
     }
     .hero-content {
       position:relative; z-index:10; width:100%;
-      padding: 0 0 80px;
+      padding: 116px 0 80px;
     }
     /* Eyebrow */
     .hero-eye {
@@ -167,9 +167,7 @@
     .btn-ghost:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.1); }
     /* Floating pills */
     .hero-pills {
-      position:absolute; top:92px;
-      left: calc((100% - min(1180px, 92%)) / 2);
-      z-index:10;
+      position:absolute; top:92px; right:36px; z-index:10;
       display:flex; flex-direction:column; gap:10px;
       opacity:0; animation: fadeLeft 1s .95s forwards;
     }
@@ -373,7 +371,7 @@
 
       /* Hero */
       .hero { justify-content: center; }
-      .hero-content { padding: 0 0 52px; }
+      .hero-content { padding: 100px 0 52px; }
       .hero-eye { margin-bottom: 12px; font-size:.65rem; }
       .hero-bar { margin: 18px 0; }
       .hero-bottom { flex-direction:column; align-items:flex-start; gap:16px; }
@@ -428,7 +426,7 @@
 
       /* Hero */
       .hero { justify-content: center; }
-      .hero-content { padding: 0 0 40px; }
+      .hero-content { padding: 92px 0 40px; }
       .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
       .hero-eye { display:none; }
       .hero-bar { margin: 14px 0; }
